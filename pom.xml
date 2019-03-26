@@ -69,7 +69,7 @@
                     <assembleDirectory>target</assembleDirectory>
                     <programs>
                         <program>
-                            <mainClass>herousample.Main</mainClass>
+                            <mainClass>herokusample.Main</mainClass>
                             <name>webapp</name>
                         </program>
                     </programs>
