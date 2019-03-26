@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Start Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+        <script>
+            angular.module('myApp', []).controller('myCtrl', function ($http, $scope) {
+                // Initialize the List to be Empty
+                $scope.fakers = [];
+                // Grab the List Contents from the API
+                $http.get('/api/faker')
+                        .then(function (result) {
+                            $scope.fakers = result.data;
+                        },
+                                function (err) {
+                                    console.log(err);
+                                });
+            });
+        </script>
+    </head>
+    <body ng-app="myApp" >
+        <p><a href="/api/hello">Go to the Hello World Sample</a></p>
+        <p><a href="/api/faker">See the Raw Faker Data</a></p>
+        <p><a href="/api/faker/100">See 100 of the Raw Faker Data</a></p>
+        <h1>The "Fakers" Example</h1>
+        <table ng-controller="myCtrl">
+            <thead>
+                <th>ID</th>
+                <th>Name</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="f in fakers">
+                    <td>{{ f.id }}</td>
+                    <td>{{ f.name }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
