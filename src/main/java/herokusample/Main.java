@@ -45,7 +45,7 @@ public class Main {
 
         String webPort = System.getenv("PORT");
         if (webPort == null || webPort.isEmpty()) {
-            webPort = "8080";
+            webPort = "8888";
         }
         tomcat.setPort(Integer.valueOf(webPort));
 
@@ -60,6 +60,8 @@ public class Main {
         ServletContainer srvCtr = new ServletContainer(resCfg);
         tomcat.addServlet(ctx, "jersey-container-servlet", srvCtr);
         ctx.addServletMapping("/api/*", "jersey-container-servlet");
+        
+        System.out.println("Listening on http://localhost:" + webPort);
 
         // Start the server, and let it listen
         tomcat.start();

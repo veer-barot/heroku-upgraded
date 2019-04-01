@@ -23,30 +23,39 @@
  */
 package herokusample;
 
-import java.util.HashSet;
-import java.util.Set;
-import javax.ws.rs.core.Application;
+import java.net.URISyntaxException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
 
 /**
- * The Application Configuration File
  *
  * @author Len Payne <len.payne@lambtoncollege.ca>
  */
-public class ApplicationConfig extends Application {
+@Path("/dbsample")
+public class DBSampleREST {
 
-    /**
-     * Used to retrieve the set of classes to register with the app.
-     *
-     * @return
-     */
-    @Override
-    public Set<Class<?>> getClasses() {
-        final Set<Class<?>> classes = new HashSet<Class<?>>();
-
-        // register RESTful resource classes
-        classes.add(HelloWorldREST.class);
-        classes.add(FakerREST.class);
-        classes.add(DBSampleREST.class);
-        return classes;
+    @GET
+    public String getAll() {
+        try {
+            Connection conn = DBUtils.getConnection();
+            String result = "";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM sample");
+            while (rs.next()) {
+                result += rs.getString("id") + ": " + rs.getString("name") + "\n";
+            }
+            return result;
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(DBSampleREST.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DBSampleREST.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "";
     }
 }

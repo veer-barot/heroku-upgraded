@@ -12,6 +12,8 @@
             <properties>
                 <exec.args>-classpath %classpath herokusample.Main</exec.args>
                 <exec.executable>java</exec.executable>
+                <Env.DATABASE_URL>jdbc:derby://app:app@localhost:1527/sample</Env.DATABASE_URL>
+                <Env.LOCALHOST>TRUE</Env.LOCALHOST>
             </properties>
         </action>
     </actions>

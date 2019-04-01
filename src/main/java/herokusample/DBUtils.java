@@ -23,30 +23,33 @@
  */
 package herokusample;
 
-import java.util.HashSet;
-import java.util.Set;
-import javax.ws.rs.core.Application;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
- * The Application Configuration File
  *
  * @author Len Payne <len.payne@lambtoncollege.ca>
  */
-public class ApplicationConfig extends Application {
+public class DBUtils {
 
-    /**
-     * Used to retrieve the set of classes to register with the app.
-     *
-     * @return
-     */
-    @Override
-    public Set<Class<?>> getClasses() {
-        final Set<Class<?>> classes = new HashSet<Class<?>>();
+    public static Connection getConnection() throws URISyntaxException, SQLException {
 
-        // register RESTful resource classes
-        classes.add(HelloWorldREST.class);
-        classes.add(FakerREST.class);
-        classes.add(DBSampleREST.class);
-        return classes;
+        if (System.getenv("LOCALHOST").equals("TRUE")) {            
+            String dbUrl = "jdbc:derby://localhost:1527/sample";
+            return DriverManager.getConnection(dbUrl, "app", "app");
+        } else {
+            URI dbUri = new URI(System.getenv("DATABASE_URL"));
+            String username = dbUri.getUserInfo().split(":")[0];
+            String password = dbUri.getUserInfo().split(":")[1];
+            String driver = "postgresql";
+            String extra = "?sslmode=require";
+            String dbUrl = "jdbc:" + driver + "://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath() + extra;
+            return DriverManager.getConnection(dbUrl, username, password);
+        }
+
+        
     }
 }
