@@ -37,7 +37,8 @@ public class DBUtils {
 
     public static Connection getConnection() throws URISyntaxException, SQLException {
 
-        if (System.getenv("LOCALHOST").equals("TRUE")) {            
+        String isLocal = System.getenv("LOCALHOST");
+        if (isLocal != null && isLocal.equals("TRUE")) {            
             String dbUrl = "jdbc:derby://localhost:1527/sample";
             return DriverManager.getConnection(dbUrl, "app", "app");
         } else {
