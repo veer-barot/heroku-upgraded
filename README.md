@@ -3,6 +3,15 @@
 This sample is a combination of things, some drafted from the Heroku documentation,
 and others drafted from a collection of stalwart JAX-RS adventurers.
 
+The API endpoints are:
+
+```
+/api
+    /hello         <-- A basic Hello World Example
+    /faker/{count} <-- A "Fake Data Generator" Example
+    /dbsample      <-- A "SELECT * FROM sample" Example
+```
+
 The Sources:
 
 - The core tutorial: https://devcenter.heroku.com/articles/create-a-java-web-application-using-embedded-tomcat
