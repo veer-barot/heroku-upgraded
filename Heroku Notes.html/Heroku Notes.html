@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body style="font-family: verdana, sans-serif;font-size: 12px;">
+<h1>Command Quick Reference</h1>
+<pre>heroku login
+heroku create
+git push heroku master
+heroku open
+heroku logout</pre>
+<h1>Heroku Longer Explanation</h1>
+<p>The best references will always be the Heroku Documentation: <a href="https://devcenter.heroku.com/">https://devcenter.heroku.com/</a>&nbsp;or more specifically the Java Getting Started steps: <a href="https://devcenter.heroku.com/articles/getting-started-with-java">https://devcenter.heroku.com/articles/getting-started-with-java</a></p>
+<p>Assuming you have a Heroku account already you need to login to Heroku at the command line:</p>
+<p>heroku login</p>
+<p>This has caused some problems with some students. The "easiest" fix is to reboot the computer. Plan B is to install the latest Heroku CLI: <a href="https://devcenter.heroku.com/articles/heroku-cli">https://devcenter.heroku.com/articles/heroku-cli</a></p>
+<p>When you complete installing this, the default location for the binary is <span style="font-family: 'courier new', courier, sans-serif;">"C:\Program Files\heroku\bin\heroku"</span> You can either add this to the start of your PATH variable, or if the first half of this sentence is gibberish, you can use the full pathname to call the heroku command (eg- type the following at the command prompt:&nbsp;<span style="font-family: 'courier new', courier, sans-serif;">"C:\Program Files\heroku\bin\heroku" login</span>)</p>
+<p>Once successfully logged in, you should make sure that your command prompt is in your project folder. There are lots of ways to do this, but Kyle shared with us that going to the project folder in Windows Explorer and typing "cmd" in the address bar will open a command prompt at that location.</p>
+<p>In the project folder (AND ONLY IN THE PROJECT FOLDER) you can run the command to create a new Heroku application:</p>
+<p>heroku create</p>
+<p>This creates a new landing place for your project on Heroku (a platform for you to build code on) and also sets up a few necessary pieces, like your Git remote repository.</p>
+<p>To actually send code to Heroku's platform, you need to use git push:</p>
+<p>git push heroku master</p>
+<p>This will initiate the build process on Heroku's side. When it completes, the command prompt will show a URL that you can go to, or you can run the following command to open a browser:</p>
+<p>heroku open</p>
+<p>If at any point, you have any problems with Heroku's login system, you can also logout:</p>
+<p>heroku logout</p>
+<h1>Heroku PostgreSQL Database</h1>
+<p>Our application at this stage (<a href="https://github.com/LenPayne/CSD4464-Heroku-2019W/">https://github.com/LenPayne/CSD4464-Heroku-2019W/</a>) will automatically add a plugin to Heroku when it's built the first time. This is the PostgreSQL database.</p>
+<p>You can access this database through NetBeans by doing the following:</p>
+<p>1. Navigate to the Heroku Dashboard for your project (eg- mine is called infinite-taiga-69907)</p>
+<p>2. Click on the Heroku Postgres add-on:<br /><img src="PastedImage_nfu368i9mt4bkzzkksz4vuxfhis18zst00111580815.png" data-d2l-editor-default-img-style="true" style="max-width: 100%;" /></p>
+<p>3. Click on "Settings" and "View Credentials..."<br /><img src="PastedImage_n74xsdpvhvogxxap8tu3tvawma5m1vz200111580815.png" data-d2l-editor-default-img-style="true" style="max-width: 100%;" /></p>
+<p>4. Open NetBeans and go to Services --&gt; Databases --&gt; Drivers --&gt; PostreSQL --&gt; Connect Using:<br /><img src="PastedImage_duo4asay66u9lxo2x4ueo582e13soeiy00111580815.png" data-d2l-editor-default-img-style="true" style="max-width: 100%;" /></p>
+<p>5. Transcribe the settings from the Heroku Postgres page to the NetBeans New Connection Wizard and "Test Connection", then "Finish".<br />SPECIAL NOTE: add <strong><span style="font-family: 'courier new', courier, sans-serif;">?sslmode=require</span></strong> to the end of the JDBC URL<br /><img src="PastedImage_cqlwoga921jfitie7genl6yplptc2h3h00111580815.png" data-d2l-editor-default-img-style="true" style="max-width: 100%;" /></p>
+<p>6. Expand the connection node that's created, and right-click on Tables to Execute Command:<br /><img src="PastedImage_xmwn7vx4w43rr52sua16zzt546chh3fh00111580815.png" data-d2l-editor-default-img-style="true" style="max-width: 100%;" /></p>
+<p>7. Execute some SQL:<br /><img src="PastedImage_gutpapmyyiljg2mt0p68q0q1f9a72ir600111580815.png" data-d2l-editor-default-img-style="true" style="max-width: 100%;" /></p>
+</body>
+</html>
